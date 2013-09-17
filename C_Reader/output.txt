@@ -1,0 +1,26 @@
+/* kyr1-06.c cuenta lineas, palabras y caracteres */
+/* las palabras se separan por espacio, tabulador o nuevalinea */
+
+#include <stdio.h>
+
+#define DENTRO	1
+#define FUERA	0
+
+void main()
+{
+  int nl, np, nc, c, estado;
+  estado = FUERA;
+  nl = np = nc = 0; //este es un comentario de prueba
+  while ((c = getchar()) != EOF) { 
+    ++nc;
+    if (c == '\n')
+      ++nl;
+    if (c == ' ' || c == '\t' || c == '\n')
+      estado = FUERA;
+    else if (estado == FUERA) {
+      estado = DENTRO;
+      ++np;
+    }
+  }
+  printf("%d %d %d\n", nl, np, nc);
+}
